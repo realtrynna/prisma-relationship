@@ -2,7 +2,9 @@ import {
     ApiHeader,
     ApiProperty,
     Assert,
-} from '../../../common/common-dto-validator';
+} from '../../../common/validators/common-dto-validator';
+
+import { IsEmail } from "class-validator";
 
 @ApiHeader({ name: '사용자 가입 데이터' })
 export class CreateUserDto {
@@ -11,8 +13,9 @@ export class CreateUserDto {
         type: String,
         description: '이메일',
     })
-    @Assert.IsNotEmpty()
-    @Assert.IsEmail()
+    // @Assert.IsNotEmpty()
+    // @Assert.IsEmail()
+    @IsEmail()
     email: string;
 
     @ApiProperty({

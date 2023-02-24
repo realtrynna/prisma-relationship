@@ -1,5 +1,5 @@
 import { applyDecorators } from '@nestjs/common';
-import Validator from 'class-validator';
+import * as Validator from 'class-validator';
 
 export { ApiHeader, ApiProperty } from '@nestjs/swagger';
 
@@ -11,11 +11,9 @@ export namespace Assert {
     export function IsNotEmpty(message?: string) {
         if (!message) message = 'Please enter the content.';
 
-        return applyDecorators(
-            Validator.IsNotEmpty({
-                message,
-            }),
-        );
+        return applyDecorators(Validator.IsNotEmpty({
+            message,
+        }))
     }
 
     export function IsString() {
@@ -42,6 +40,7 @@ export namespace Assert {
     }
 
     export function IsEmail() {
+        console.log("이메일 데코레이터 실행");
         return applyDecorators(
             Validator.IsEmail(
                 {
