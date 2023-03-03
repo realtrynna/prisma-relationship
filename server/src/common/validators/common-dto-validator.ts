@@ -40,7 +40,6 @@ export namespace Assert {
     }
 
     export function IsEmail() {
-        console.log("이메일 데코레이터 실행");
         return applyDecorators(
             Validator.IsEmail(
                 {
@@ -48,7 +47,7 @@ export namespace Assert {
                 },
                 {
                     message:
-                        'Gmail is not available and please check if the email format is correct.',
+                        'Mail is not available and please check if the email format is correct.',
                 },
             ),
         );

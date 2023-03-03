@@ -1,3 +1,4 @@
+import { Transform } from "class-transformer";
 import {
     ApiHeader,
     ApiProperty,
@@ -8,14 +9,14 @@ import { IsEmail } from "class-validator";
 
 @ApiHeader({ name: '사용자 가입 데이터' })
 export class CreateUserDto {
+    @Transform(({ value, obj }) => value.trim())
     @ApiProperty({
         example: 'admin@admin.com',
         type: String,
         description: '이메일',
     })
-    // @Assert.IsNotEmpty()
-    // @Assert.IsEmail()
-    @IsEmail()
+    @Assert.IsNotEmpty()
+    @Assert.IsEmail()
     email: string;
 
     @ApiProperty({
@@ -37,5 +38,6 @@ export class CreateUserDto {
         type: String,
         description: '비밀번호',
     })
+    @Assert.IsNotEmpty()
     password: string;
 }
