@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
-import { EnvConfigModule } from "./common/config/config.module";
-import { UserModule} from "./controllers/user/user.module";
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { EnvConfigModule } from './common/config/config.module';
+import { UserModule } from './controllers/user/user.module';
+import { HealthCheckModule } from './controllers/health-check/health-check.module';
 
 @Module({
     imports: [
@@ -17,6 +18,7 @@ import { AppService } from './app.service';
                     : 'development.env',
         }),
         UserModule,
+        HealthCheckModule,
         // EnvConfigModule.register({
         //     isGlobal: true,
         // })

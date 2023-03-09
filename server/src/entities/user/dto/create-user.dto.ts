@@ -1,15 +1,13 @@
-import { Transform } from "class-transformer";
+import { Transform } from 'class-transformer';
 import {
     ApiHeader,
     ApiProperty,
     Assert,
 } from '../../../common/validators/common-dto-validator';
 
-import { IsEmail } from "class-validator";
-
-@ApiHeader({ name: '사용자 가입 데이터' })
+@ApiHeader({ name: '회원가입 데이터' })
 export class CreateUserDto {
-    @Transform(({ value, obj }) => value.trim())
+    @Transform(({ value }) => value.trim())
     @ApiProperty({
         example: 'admin@admin.com',
         type: String,
@@ -40,4 +38,6 @@ export class CreateUserDto {
     })
     @Assert.IsNotEmpty()
     password: string;
+
+    constructor() {}
 }
