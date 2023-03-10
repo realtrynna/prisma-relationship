@@ -1,12 +1,25 @@
 import { Controller, Get } from '@nestjs/common';
+import { TypedBody, TypedRoute } from '@nestia/core';
+
 import { AppService } from './app.service';
+
+interface Dto {
+    /**
+     * @format email
+     */
+    email: string;
+    /**
+     * @type int
+     */
+    age: number;
+}
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+    constructor(private readonly appService: AppService) {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
-  }
+    @TypedRoute.Post('nestia')
+    here(@TypedBody() dto: Dto): string {
+        return 'hello';
+    }
 }
