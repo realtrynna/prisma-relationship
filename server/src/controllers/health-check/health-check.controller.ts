@@ -7,7 +7,7 @@ import {
     MemoryHealthIndicator,
 } from '@nestjs/terminus';
 
-@Controller('/health-check')
+@Controller('health-check')
 @ApiTags('헬스 체크')
 export class HealthCheckController {
     constructor(
