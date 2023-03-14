@@ -5,7 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { EnvConfigModule } from './common/config/config.module';
 import { UserModule } from './controllers/user/user.module';
-import { HealthCheckModule } from './controllers/health-check/health-check.module';
+import { HealthCheckModule } from './controllers/health/health-check.module';
 
 @Module({
     imports: [
