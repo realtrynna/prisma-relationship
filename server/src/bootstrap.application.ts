@@ -1,9 +1,11 @@
 import { ValidationPipe } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
+import { NestApplication, NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { EventEmitter } from 'events';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import { AppModule } from './app.module';
+import { build } from 'joi';
 
 export class BootstrapApplication extends EventEmitter {
     #app: NestExpressApplication | null = null;
@@ -30,11 +32,60 @@ export class BootstrapApplication extends EventEmitter {
         //     }),
         // );
 
+        this.#initSwaggerDocs();
+
         this.#app.listen(BootstrapApplication.#PORT);
     }
 
     #isProd(): boolean {
         return process.env.NODE_ENV === 'production';
+    }
+
+    #getSwaggerConfig() {
+        return (
+            new DocumentBuilder()
+                .setTitle('API')
+                .setDescription('API server')
+                .addBearerAuth({
+                    type: 'http',
+                    scheme: 'bearer',
+                    bearerFormat: 'JWT',
+                })
+                .setContact(
+                    'Developer',
+                    'https://github.com/realtrynna',
+                    'realtrynna@gmail.com',
+                )
+                .addServer('http://localhost:1000')
+                // .addServer("prod")
+                .setVersion('1.0')
+                .build()
+        );
+    }
+
+    #initSwaggerDocs() {
+        const config = this.#getSwaggerConfig();
+        const document = SwaggerModule.createDocument(
+            this.#app as NestExpressApplication,
+            config,
+        );
+
+        SwaggerModule.setup(
+            'docs',
+            this.#app as NestExpressApplication,
+            document,
+            {
+                // explorer: true,
+                swaggerOptions: {
+                    tagsSorter: 'alpha',
+                    operationSorter: 'method',
+                    defaultModelsExpandDepth: -1,
+                    persistAuthorization: true,
+                },
+            },
+        );
+
+        return this;
     }
 
     static getInstance() {

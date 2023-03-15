@@ -10,10 +10,9 @@ import { CreateUserDto } from '../../entities/user/dto/create-user.dto';
 export class UserService {
     async createUser(createUserDto: CreateUserDto) {
         try {
-            throw new BadRequestException('베드리퀘스트익셉션!!!');
+            // throw new BadRequestException();
         } catch (err) {
-            console.log('서비스 캐치 실행     ');
-            throw new InternalServerErrorException(err);
+            // throw new InternalServerErrorException(err);
         }
     }
 }

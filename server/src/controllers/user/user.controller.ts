@@ -15,13 +15,17 @@ export class UserController {
         try {
             const createUser = await this.userService.createUser(createUserDto);
 
-            console.log('Create User     ', createUser);
+            return ResponseUtil.succeededWrap(
+                {
+                    message: '회원 가입 성공',
+                    statusCode: 201,
+                },
+                {},
+            );
         } catch (err) {
-            console.log('여기가 실행?!');
-            console.log(err);
             return ResponseUtil.failedWrap({
-                message: err as string,
                 statusCode: HttpStatus.BAD_REQUEST,
+                message: err as string,
             });
         }
     }
