@@ -3,9 +3,8 @@ import { ConfigModule } from '@nestjs/config';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { EnvConfigModule } from './common/config/config.module';
-import { UserModule } from './controllers/user/user.module';
-import { HealthCheckModule } from './controllers/health/health-check.module';
+import { UserModule } from './domain/user/user.module';
+import { HealthCheckModule } from './domain/health/health-check.module';
 
 @Module({
     imports: [
@@ -19,9 +18,6 @@ import { HealthCheckModule } from './controllers/health/health-check.module';
         }),
         UserModule,
         HealthCheckModule,
-        // EnvConfigModule.register({
-        //     isGlobal: true,
-        // })
     ],
     controllers: [AppController],
     providers: [AppService],

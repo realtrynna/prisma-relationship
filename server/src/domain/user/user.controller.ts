@@ -1,8 +1,8 @@
-import { Controller, Body, HttpStatus, Get, Post } from '@nestjs/common';
+import { Body, Controller, HttpStatus, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
 import { UserService } from './user.service';
-import { CreateUserDto } from '../../entities/user/dto/create-user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 import { ResponseUtil } from '../../libs/response';
 
 @Controller('user')
