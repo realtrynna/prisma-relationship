@@ -10,7 +10,7 @@ import { build } from 'joi';
 export class BootstrapApplication extends EventEmitter {
     #app: NestExpressApplication | null = null;
     static #INSTANCE: BootstrapApplication;
-    static #PORT = 1000;
+    static #PORT = 2000;
 
     private constructor() {
         super();
