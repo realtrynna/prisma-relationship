@@ -8,8 +8,22 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  age   Int
+  userId Int     @id @default(autoincrement()) @map("user_id")
+  email  String  @unique @db.VarChar(50)
+  name   String? @db.VarChar(20)
+
+  UserMeta UserMeta?
+
+  @@map("user")
+}
+
+model UserMeta {
+  age       Int    @db.Integer
+  gender    String @db.VarChar(10)
+  introduce String @db.Text
+
+  user   User @relation(fields: [userId], references: [userId], onDelete: Cascade)
+  userId Int  @unique
+
+  @@map("user_meta")
 }
